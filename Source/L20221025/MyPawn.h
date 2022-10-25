@@ -8,7 +8,7 @@
 
 
 class UBoxComponent;
-class UStaicMeshComponent;
+class UStaticMeshComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
@@ -35,11 +35,11 @@ public:
 
 	UBoxComponent* Box;
 
-	UStaicMeshComponent* Body;
+	UStaticMeshComponent* Body;
 
-	UStaicMeshComponent* Left;
+	UStaticMeshComponent* Left;
 
-	UStaicMeshComponent* Right;
+	UStaticMeshComponent* Right;
 
 	USpringArmComponent* SpringArm;
 
