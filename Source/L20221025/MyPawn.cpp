@@ -11,6 +11,7 @@
 #include "Engine/StaticMesh.h"
 #include "Components/ArrowComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "MyRocket.h"
 
 // Sets default values
 AMyPawn::AMyPawn()
@@ -65,7 +66,6 @@ AMyPawn::AMyPawn()
 void AMyPawn::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
@@ -92,9 +92,9 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyPawn::Fire()
 {
-	GetWorld()->SpawnActor<AActor>(AActor::StaticClass(),
-		GetActorLocation(),
-		GetActorRotation());
+	GetWorld()->SpawnActor<AActor>(AMyRocket::StaticClass(),
+		Arrow->K2_GetComponentLocation(),
+		Arrow->K2_GetComponentRotation());
 }
 
 void AMyPawn::Pitch(float Value)
