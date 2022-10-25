@@ -12,6 +12,7 @@ class UStaticMeshComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
+class UArrowComponent;
 
 UCLASS()
 class L20221025_API AMyPawn : public APawn
@@ -47,4 +48,5 @@ public:
 
 	UFloatingPawnMovement* Movement;
 
+	UArrowComponent* Arrow;
 };

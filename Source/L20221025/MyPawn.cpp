@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Engine/StaticMesh.h"
+#include "Components/ArrowComponent.h"
 
 // Sets default values
 AMyPawn::AMyPawn()
@@ -38,17 +39,25 @@ AMyPawn::AMyPawn()
 	{
 		Right->SetStaticMesh(SM_Propeller.Object);
 		Left->SetStaticMesh(SM_Propeller.Object);
+		Right->SetRelativeLocation(FVector(36.269119f, 21.026630f,0.310581f));
+		Left->SetRelativeLocation(FVector(36.269119f, -21.026630f, 0.310581f));
 	}
-
-
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(Box);
+	SpringArm->TargetArmLength = 150.0f;
+	SpringArm->bEnableCameraLag = true;
+	SpringArm->bEnableCameraRotationLag = true;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
+	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
+	Arrow->SetupAttachment(Box);
+	Arrow->SetRelativeLocation(FVector(80.f, 0, 0));
+
 	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
+	Movement->MaxSpeed = 100.0f;
 
 
 }
@@ -65,6 +74,11 @@ void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	Left->AddLocalRotation(FRotator(0, 0, 3600.0f * DeltaTime));
+	Right->AddLocalRotation(FRotator(0, 0, 3600.0f * DeltaTime));
+	//AddActorLocalOffset(FVector(100.0f * DeltaTime, 0, 0));
+
+	AddMovementInput(GetActorForwardVector());
 }
 
 // Called to bind functionality to input
